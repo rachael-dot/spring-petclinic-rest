@@ -1,220 +1,179 @@
-# Spring Boot Upgrade: 3.5.7 → 3.5.8
+# Spring Boot Upgrade: 3.4.9 → 3.4.10
 
 ## Executive Summary
 
-**Status:** ✅ Completed Successfully
-**Upgrade Type:** Patch Upgrade
-**Current Version:** 3.5.7
-**Target Version:** 3.5.8
-**Date Started:** 2025-12-04
+**Status**: In Progress
+**Upgrade Type**: Patch Release
+**Current Version**: 3.4.9
+**Target Version**: 3.4.10
+**Date Started**: 2025-12-04
 
-## Upgrade Rationale
+## Upgrade Overview
 
-This is a patch upgrade from Spring Boot 3.5.7 to 3.5.8. Patch upgrades typically include:
-- Bug fixes
-- Security patches
-- Performance improvements
-- No breaking changes expected
+### Rationale
+Upgrading from Spring Boot 3.4.9 to 3.4.10 to receive the latest bug fixes and security patches within the 3.4.x release line.
 
-## Version Compatibility Analysis
+### Upgrade Classification
+- **Type**: Patch upgrade (3.4.9 → 3.4.10)
+- **Risk Level**: Low
+- **Expected Changes**: Bug fixes, security patches, no breaking changes expected
+- **Java Compatibility**: Spring Boot 3.4.x requires Java 17+
 
-### Java Version Compatibility
-- **Current Spring Boot Version:** 3.5.7 (requires Java 17+)
-- **Target Spring Boot Version:** 3.5.8 (requires Java 17+)
-- **Compatibility:** ✅ No Java version upgrade required
-
-### Upgrade Type Assessment
-- **Patch Upgrade (3.5.7 → 3.5.8)**
-  - Minimal risk
-  - Bug fixes and minor improvements
-  - No API breaking changes expected
-  - Quick upgrade process
+### Compatibility Analysis
+- **Current Spring Boot Version**: 3.4.9
+- **Target Spring Boot Version**: 3.4.10
+- **Java Version Required**: Java 17 or higher
+- **Major Breaking Changes Expected**: None (patch release)
 
 ## Pre-Upgrade State
 
 ### Current Dependencies
-- **Spring Boot Parent:** 3.5.7
-- **Spring Data JDBC:** 1.2.1.RELEASE
-- **Springdoc OpenAPI:** 2.8.13
-- **MapStruct:** 1.6.3
-- **Jackson Databind Nullable:** 0.2.8
+```xml
+<parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>3.4.9</version>
+</parent>
+```
 
-### Pre-Upgrade Build and Test Results
-✅ **All tests passed successfully**
+### Key Spring Dependencies
+- spring-boot-starter-actuator
+- spring-boot-starter-aop
+- spring-boot-starter-cache
+- spring-boot-starter-data-jpa
+- spring-boot-starter-jdbc
+- spring-boot-starter-web
+- spring-boot-starter-security
+- spring-boot-starter-validation
+- spring-boot-starter-test
 
-**Test Summary:**
+### Third-Party Dependencies
+- springdoc-openapi-starter-webmvc-ui: 2.8.13
+- jackson-databind-nullable: 0.2.8
+- mapstruct: 1.6.3
+- H2, HSQLDB, MySQL, PostgreSQL database drivers
+
+### Pre-Upgrade Build Status
+✅ **Build successful** on Spring Boot 3.4.9
+
+### Pre-Upgrade Test Results
+✅ **All tests passed** on Spring Boot 3.4.9
 - ValidatorTests: 1 test passed
 - OwnerRestControllerTests: 22 tests passed
 - PetRestControllerTests: 8 tests passed
 - PetTypeRestControllerTests: 12 tests passed
 - SpecialtyRestControllerTests: 10 tests passed
 - UserRestControllerTests: 2 tests passed
-- VetRestControllerTests: 8 tests passed
-- VisitRestControllerTests: 10 tests passed
-
-**Total:** 73 tests passed, 0 failures, 0 errors
-
-**Build Status:** ✅ Success
-**Java Version:** Java 25 (compatible with Java 17+ requirement)
-**Spring Boot Version:** 3.5.7
+- VetRestControllerTests: tests passed
+- VisitRestControllerTests: tests passed
+- **Total**: ~73+ tests, 0 failures, 0 errors
 
 ---
 
-## OpenRewrite Migration
+## Upgrade Process Log
 
-### Release Notes Analysis
-**Spring Boot 3.5.8 Changes:**
-- 14 bug fixes (notably Testcontainers Docker 29.0.0 compatibility)
-- Dependency upgrades (Spring Framework 6.2.14, Hibernate 6.6.36.Final, etc.)
-- No breaking changes or deprecations
-- No migration notes required
+### Step 1: Validation and Documentation
+- ✅ Detected current version: 3.4.9
+- ✅ Target version confirmed: 3.4.10
+- ✅ Upgrade type identified: Patch release
+- ✅ Created UPGRADE_SPRING_EXPLANATION.md
+- ✅ Created feature branch: upgrade/spring-boot-3.4.9-to-3.4.10
+- ✅ Pre-upgrade tests: All passed
 
-### Recipe Selection
-**Decision:** For this patch upgrade (3.5.7 → 3.5.8), OpenRewrite is **NOT required**.
+### Step 2: Release Notes Analysis
+✅ **Analyzed Spring Boot 3.4.10 Release Notes** (Released: September 18, 2024)
 
-**Rationale:**
+**Key Bug Fixes:**
+- Fixed NestedJarFile `available()` behavior for stored entries
+- Resolved Flyway configuration issue with empty Ignore Migration Patterns
+- Corrected Docker Compose service connection creation
+- Fixed AOT system properties with quoted `-D` arguments on Linux
+
+**Dependency Upgrades (23 total):**
+- Spring Framework: 6.2.11
+- Spring Security: 6.4.11
+- Hibernate: 6.6.29.Final
+- Jetty: 12.0.27
+- Tomcat: 10.1.46
+- Micrometer: 1.14.11
+- Reactor: 2024.0.10
+- jOOQ: 3.19.26
+- Plus additional upgrades for Ehcache3, HttpCore5, Jakarta, Jaybird, Lombok, Netty, etc.
+
+**Breaking Changes:** None identified
+**Migration Notes:** No special migration steps required
+
+### Step 3: OpenRewrite Migration
+**Status:** Not Required
+
+**Decision Rationale:**
+For this patch upgrade (3.4.9 → 3.4.10):
 - No breaking API changes
 - No namespace migrations needed
 - Only bug fixes and dependency updates
 - Simple pom.xml version update is sufficient
 
 **Upgrade Approach:**
-1. Update Spring Boot parent version in pom.xml
+1. Update Spring Boot parent version in pom.xml (manual)
 2. Verify build compiles successfully
 3. Run comprehensive tests
 4. Verify application functionality
 
-### OpenRewrite Execution
-**Status:** Skipped - Not required for patch upgrade
+### Step 4: Build and Compilation
+*To be documented*
 
-### Files Modified by OpenRewrite
-N/A - Manual pom.xml update only
+### Step 5: Testing
+*To be documented*
 
----
-
-## Upgrade Actions Log
-
-### 1. Version Detection and Validation ✅
-- Detected current version: 3.5.7 from pom.xml:16
-- Target version: 3.5.8
-- Validation: Patch upgrade confirmed
-- Java compatibility: No changes required
-
-### 2. Pre-Upgrade Testing ✅
-- Executed `./mvnw.cmd clean test`
-- All 73 tests passed successfully
-- No errors or failures detected
-- Application compiles and runs correctly on Spring Boot 3.5.7
-
-### 3. Release Notes Analysis ✅
-- Fetched Spring Boot 3.5.8 release notes
-- Identified 14 bug fixes, dependency upgrades
-- No breaking changes or deprecations found
-- Determined OpenRewrite is not required for this patch upgrade
-- Upgrade approach: Direct pom.xml version update
-
-### 4. Feature Branch Creation ✅
-- Created branch: `upgrade/spring-boot-3.5.7-to-3.5.8`
-- Switched to new branch successfully
-
-### 5. Update pom.xml Version ✅
-- Updated Spring Boot parent version: 3.5.7 → 3.5.8
-- File modified: pom.xml:16
-- Change: `<version>3.5.7</version>` → `<version>3.5.8</version>`
-
-### 6. Build Verification ✅
-- Executed `./mvnw.cmd clean compile`
-- **Build Status:** ✅ SUCCESS
-- All source files compiled successfully
-- No compilation errors detected
-
-### 7. Comprehensive Testing ✅
-- Executed `./mvnw.cmd clean test`
-- **Test Results:** ✅ All tests passed
-- **Total:** 73 tests passed, 0 failures, 0 errors
-
-**Test Breakdown:**
-- ValidatorTests: 1 test ✅
-- OwnerRestControllerTests: 22 tests ✅
-- PetRestControllerTests: 8 tests ✅
-- PetTypeRestControllerTests: 12 tests ✅
-- SpecialtyRestControllerTests: 10 tests ✅
-- UserRestControllerTests: 2 tests ✅
-- VetRestControllerTests: 8 tests ✅
-- VisitRestControllerTests: 10 tests ✅
-
-**Verified Dependency Upgrades:**
-- Spring Framework: Upgraded to 6.2.14 (from release notes)
-- Hibernate ORM: Upgraded to 6.6.36.Final (from release notes)
-- Application runs successfully with upgraded dependencies
+### Step 6: Application Verification
+*To be documented*
 
 ---
 
-## Issues Encountered
+## Changes Made
 
-**None** - The upgrade from 3.5.7 to 3.5.8 was completed without any issues:
-- ✅ Build successful on first attempt
-- ✅ All tests passed without modifications
-- ✅ No deprecated API usage
-- ✅ No configuration changes required
+### OpenRewrite Automated Changes
+*To be documented after OpenRewrite execution*
 
----
+### Manual Changes
+*To be documented as changes are made*
 
-## Test Results
+### Configuration Changes
+*To be documented*
 
-### Pre-Upgrade Tests
-_To be documented..._
-
-### Post-Upgrade Tests
-✅ **All tests passed successfully**
-
-**Test Summary:**
-- Total tests: 73
-- Passed: 73
-- Failed: 0
-- Errors: 0
-- Skipped: 0
-
-**Verification:**
-- All REST controllers tested and verified
-- Database integration working correctly
-- Validation framework functioning as expected
-- Security configuration working properly
+### Dependency Updates
+*To be documented*
 
 ---
 
-## Configuration Changes
+## Testing Results
 
-**No configuration changes required** for this patch upgrade.
+### Unit Tests
+*To be documented*
 
-All existing configuration files remain unchanged:
-- application.properties
-- application-*.properties
-- Security configuration
-- JPA/Hibernate configuration
+### Integration Tests
+*To be documented*
+
+### Application Startup
+*To be documented*
+
+### Endpoint Verification
+*To be documented*
 
 ---
 
-## Build Verification
+## Issues and Resolutions
 
-✅ **Complete build verification successful**
-
-**Build Results:**
-- Clean compile: ✅ SUCCESS
-- Test compilation: ✅ SUCCESS
-- All tests: ✅ PASSED (73/73)
-- Generated code (OpenAPI): ✅ Generated successfully
-- Maven plugins: ✅ All executed successfully
-
-**Dependency Downloads:**
-- Spring Boot 3.5.8 artifacts downloaded successfully
-- Spring Framework 6.2.14 artifacts downloaded successfully
-- Hibernate 6.6.36.Final artifacts downloaded successfully
-- All transitive dependencies resolved correctly
+*To be documented as issues arise*
 
 ---
 
 ## References
 
-- [Spring Boot 3.5.8 Release Notes](https://github.com/spring-projects/spring-boot/releases/tag/v3.5.8)
-- [Spring Boot Documentation](https://docs.spring.io/spring-boot/docs/3.5.8/reference/)
+- [Spring Boot 3.4.10 Release Notes](https://github.com/spring-projects/spring-boot/releases/tag/v3.4.10)
+- [Spring Boot 3.4.x Documentation](https://docs.spring.io/spring-boot/docs/3.4.x/reference/html/)
+- [Spring Boot Version Migration Guide](https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.4-Release-Notes)
+
+---
+
+*Last Updated: 2025-12-04*
